@@ -1,5 +1,5 @@
 import * as productService from "../../services/product.service.js";
-import Product from "../../models/Product.model.js";
+import Product from "../../models/product.model.js";
 
 export const index = async (req, res) => {
   try {
