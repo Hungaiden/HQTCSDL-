@@ -67,6 +67,57 @@ export const getAllProducts = async ({
     };
 
   } catch (error) {
-    throw new Error("Error getting products: " + error.message);
+    throw new Error("Lỗi khi lấy danh sách sản phẩm " + error.message);
+  }
+}
+
+export const createProduct = async (data) => {
+  try {
+    const product = new Product(data);
+    await product.save();
+    return product;
+  } catch (error) {
+    throw new Error("Lỗi khi thêm sản phẩm " + error.message);
+  }
+}
+
+export const updateProduct = async (id, data) => {
+  try {
+    const product = await Product.findOneAndUpdate({
+        _id: id,
+        deleted: false
+      },
+      data, // Sửa từ { data } thành data
+      {
+        new: true
+      }
+    );
+
+    if (!product) {
+      throw new Error("Không tìm thấy sản phẩm!");
+    }
+
+    return product;
+  } catch (error) {
+    throw new Error("Lỗi khi cập nhật sản phẩm: " + error.message);
+  }
+}
+
+export const deleteProduct = async (id) => {
+  try {
+    const product = await Product.findOneAndUpdate({
+      _id: id,
+      deleted: false
+    }, {
+      deleted: true,
+    }, {
+      new: true
+    });
+    if (!product) {
+      throw new Error("Không tìm thấy sản phẩm!");
+    }
+    return product;
+  } catch (error) {
+    throw new Error("Lỗi khi xóa sản phẩm " + error.message);
   }
 }

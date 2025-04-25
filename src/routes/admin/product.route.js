@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.get("/", controller.index);
 
-// router.post("/create", controller.create);
+router.post("/create", controller.create);
 
-// router.patch("/edit/:id", controller.edit);
+router.patch("/update/:id", controller.update);
 
-// router.delete("/delete/:id", controller.delete);
+router.delete("/delete/:id", controller.deleteOne); 
 
 export default router;

@@ -21,13 +21,66 @@ export const index = async (req, res) => {
 
     res.json({
       code: 200,
-      message: "Success",
+      message: "Lấy danh sách sản phẩm thành công",
       data: result
     });
   } catch (error) {
     res.status(500).json({
       code: 500,
-      message: error.message
+      message: "Lỗi khi lấy danh sách sản phẩm!"
+    });
+  }
+}
+
+export const create = async (req, res) => {
+  try {
+    const product = await productService.createProduct(req.body);
+    return res.status(201).json({
+      code: 201,
+      message: "Tạo sản phẩm thành công",
+      data: product
+    });
+  }
+catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: "Lỗi khi tạo sản phẩm!"
+    });
+  }
+}
+
+export const update = async (req, res) => {
+  try {
+    const {id} = req.params
+    const product = await productService.updateProduct(id, req.body);
+    return res.status(200).json({
+      code: 200,
+      message: "Cập nhật sản phẩm thành công",
+      data: product
+    });
+  }
+  catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: "Lỗi khi cập nhật sản phẩm!"
+    });
+  }
+}
+
+export const deleteOne = async (req, res) => {
+  try {
+    const {id} = req.params
+    const product = await productService.deleteProduct(id);
+    return res.status(200).json({
+      code: 200,
+      message: "Xóa sản phẩm thành công",
+      data: product
+    });
+  }
+  catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: "Lỗi khi xóa sản phẩm!"
     });
   }
 }
