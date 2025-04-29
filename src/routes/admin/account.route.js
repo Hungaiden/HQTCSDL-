@@ -11,4 +11,6 @@ router.patch("/update/:id", controller.update);
 
 router.delete("/delete/:id", controller.deleteOne);
 
+router.get("/:id", controller.getOne);
+
 export default router;

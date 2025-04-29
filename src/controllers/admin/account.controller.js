@@ -86,3 +86,23 @@ export const deleteOne = async (req, res) => {
     });
   }
 }
+
+export const getOne = async (req, res) => {
+  try {
+    const {
+      id
+    } = req.params;
+    const account = await accountService.getAccountById(id);
+
+    return res.status(200).json({
+      code: 200,
+      message: "Lấy chi tiết tài khoản thành công",
+      data: account
+    });
+  } catch (error) {
+    res.status(error.message.includes("không tìm thấy") ? 404 : 500).json({
+      code: error.message.includes("không tìm thấy") ? 404 : 400,
+      message: error.message
+    });
+  }
+}

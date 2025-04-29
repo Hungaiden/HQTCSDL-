@@ -31,6 +31,23 @@ export const index = async (req, res) => {
   }
 }
 
+export const getOne = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const category = await categoryService.getCategoryById(id);
+
+    return res.status(200).json({
+      code: 200,
+      message: "Lấy chi tiết danh mục thành công",
+      data: category
+    });
+  } catch (error) {
+    res.status(error.message.includes("không tìm thấy") ? 404 : 500).json({
+      code: error.message.includes("không tìm thấy") ? 404 : 400,
+      message: error.message
+    });
+  }
+}
 export const create = async (req, res) => {
   try {
     const category = await categoryService.createCategory(req.body);

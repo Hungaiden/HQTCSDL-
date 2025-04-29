@@ -40,8 +40,7 @@ export const create = async (req, res) => {
       message: "Tạo sản phẩm thành công",
       data: product
     });
-  }
-catch (error) {
+  } catch (error) {
     res.status(500).json({
       code: 500,
       message: "Lỗi khi tạo sản phẩm!"
@@ -51,15 +50,16 @@ catch (error) {
 
 export const update = async (req, res) => {
   try {
-    const {id} = req.params
+    const {
+      id
+    } = req.params
     const product = await productService.updateProduct(id, req.body);
     return res.status(200).json({
       code: 200,
       message: "Cập nhật sản phẩm thành công",
       data: product
     });
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({
       code: 500,
       message: "Lỗi khi cập nhật sản phẩm!"
@@ -69,18 +69,39 @@ export const update = async (req, res) => {
 
 export const deleteOne = async (req, res) => {
   try {
-    const {id} = req.params
+    const {
+      id
+    } = req.params
     const product = await productService.deleteProduct(id);
     return res.status(200).json({
       code: 200,
       message: "Xóa sản phẩm thành công",
       data: product
     });
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({
       code: 500,
       message: "Lỗi khi xóa sản phẩm!"
+    });
+  }
+}
+
+export const getOne = async (req, res) => {
+  try {
+    const {
+      id
+    } = req.params;
+    const product = await productService.getProductById(id);
+
+    return res.status(200).json({
+      code: 200,
+      message: "Lấy chi tiết sản phẩm thành công",
+      data: product
+    });
+  } catch (error) {
+    res.status(error.message.includes("không tìm thấy") ? 404 : 500).json({
+      code: error.message.includes("không tìm thấy") ? 404 : 400,
+      message: error.message
     });
   }
 }

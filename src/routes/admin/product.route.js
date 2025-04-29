@@ -9,6 +9,8 @@ router.post("/create", controller.create);
 
 router.patch("/update/:id", controller.update);
 
-router.delete("/delete/:id", controller.deleteOne); 
+router.delete("/delete/:id", controller.deleteOne);
+
+router.get("/:id", controller.getOne);
 
 export default router;

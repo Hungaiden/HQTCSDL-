@@ -1,4 +1,3 @@
-
 import moment from "moment";
 import Account from "../models/account.model.js";
 
@@ -139,5 +138,17 @@ export const deleteAccount = async (id) => {
     return deletedAccount;
   } catch (error) {
     throw new Error("Lỗi khi xóa tài khoản: " + error.message);
+  }
+}
+
+export const getAccountById = async (id) => {
+  try {
+    const account = await Account.findById(id);
+    if (!account) {
+      throw new Error("Tài khoản không tìm thấy");
+    }
+    return account;
+  } catch (error) {
+    throw new Error(error.message);
   }
 }

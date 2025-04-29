@@ -60,6 +60,17 @@ export const getAllCategories = async ({
   }
 }
 
+export const getCategoryById = async (id) => {
+  try {
+    const category = await Category.findById(id);
+    if (!category) {
+      throw new Error("Danh mục không tìm thấy");
+    }
+    return category;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 export const createCategory = async (data) => {
   try {
     // Check if title exists

@@ -121,3 +121,15 @@ export const deleteProduct = async (id) => {
     throw new Error("Lỗi khi xóa sản phẩm " + error.message);
   }
 }
+
+export const getProductById = async (id) => {
+  try {
+    const product = await Product.findById(id);
+    if (!product) {
+      throw new Error("Sản phẩm không tìm thấy");
+    }
+    return product;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
