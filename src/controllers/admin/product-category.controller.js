@@ -103,3 +103,21 @@ export const deleteOne = async (req, res) => {
     });
   }
 }
+
+export const getAllNoLimit = async (req, res) => {
+  try {
+    const categories = await categoryService.getAllCategoriesNoLimit();
+    res.json({
+      code: 200,
+      message: "Lấy danh sách danh mục thành công",
+      data: {
+        categories: categories
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: error.message
+    });
+  }
+};

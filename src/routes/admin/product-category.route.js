@@ -22,4 +22,7 @@ router.patch(
 router.delete("/delete/:id", controller.deleteOne);
 
 router.get("/:id", controller.getOne);
+
+router.get("/all", controller.getAllNoLimit);
+
 export default router;

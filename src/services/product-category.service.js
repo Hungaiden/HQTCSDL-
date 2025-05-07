@@ -32,8 +32,10 @@ export const getAllCategories = async ({
     }
 
     // Pagination
+    const page = parseInt(queryParams.page) || 1;
+    const limit = parseInt(queryParams.limit) || 10;
     const skip = (page - 1) * limit;
-
+    
     // Get total categories for pagination
     const totalCategory = await ProductCategory.countDocuments(find);
     const totalPage = Math.ceil(totalCategory / limit);
@@ -55,6 +57,19 @@ export const getAllCategories = async ({
       }
     };
 
+  } catch (error) {
+    throw new Error("Lỗi khi lấy danh sách danh mục: " + error.message);
+  }
+}
+
+export const getAllCategoriesNoLimit = async () => {
+  try {
+    const categories = await ProductCategory.find({
+      deleted: false,
+      status: "active"
+    }).sort({ position: "asc" });
+
+    return categories;
   } catch (error) {
     throw new Error("Lỗi khi lấy danh sách danh mục: " + error.message);
   }
