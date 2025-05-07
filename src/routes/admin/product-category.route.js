@@ -5,6 +5,8 @@ import upload from '../../config/multer.js'
 import { uploadSingle, uploadMultiple } from "../../middlewares/upload.middleware.js";
 const router = express.Router();
 
+router.get("/all", controller.getAllNoLimit);
+router.get("/:id", controller.getOne);
 router.get("/", controller.index);
 
 router.post(
@@ -20,9 +22,5 @@ router.patch(
   controller.update);
 
 router.delete("/delete/:id", controller.deleteOne);
-
-router.get("/:id", controller.getOne);
-
-router.get("/all", controller.getAllNoLimit);
 
 export default router;
