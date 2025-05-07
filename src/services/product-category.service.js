@@ -75,7 +75,7 @@ export const getAllCategoriesNoLimit = async () => {
 
 export const getCategoryById = async (id) => {
   try {
-    const category = await Category.findById(id);
+    const category = await ProductCategory.findById(id);
     if (!category) {
       throw new Error("Danh mục không tìm thấy");
     }
@@ -84,6 +84,7 @@ export const getCategoryById = async (id) => {
     throw new Error(error.message);
   }
 }
+
 export const createCategory = async (data) => {
   try {
     // Check if title exists
