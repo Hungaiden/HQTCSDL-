@@ -32,8 +32,6 @@ export const getAllCategories = async ({
     }
 
     // Pagination
-    const page = parseInt(queryParams.page) || 1;
-    const limit = parseInt(queryParams.limit) || 10;
     const skip = (page - 1) * limit;
     
     // Get total categories for pagination
