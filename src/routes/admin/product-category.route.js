@@ -24,4 +24,12 @@ router.patch(
 
 router.delete("/delete/:id", controller.deleteOne);
 
+router.get("/featured", controller.getFeatured);
+
+router.patch(
+  "/:id/feature",
+  controller.setFeatured
+)
+
+
 export default router;

@@ -165,3 +165,37 @@ export const deleteCategory = async (id) => {
     throw new Error("Lỗi khi xóa danh mục: " + error.message);
   }
 }
+
+export const setFeatured = async (id, isFeatured) => {
+  try {
+    const category = await ProductCategory.findOneAndUpdate({
+      _id: id,
+      deleted: false
+    }, {
+      isFeatured: isFeatured
+    }, {
+      new: true
+    });
+
+    if (!category) {
+      throw new Error("Không tìm thấy danh mục!");
+    }
+
+    return category;
+  } catch (error) {
+    throw new Error("Lỗi khi cập nhật trạng thái nổi bật: " + error.message);
+  }
+}
+
+export const getFeatured = async () => {
+  try {
+    const categories = await ProductCategory.find({
+      deleted: false,
+      isFeatured: true
+    }).sort({ position: "asc" });
+
+    return categories;
+  } catch (error) {
+    throw new Error("Lỗi khi lấy danh sách danh mục nổi bật: " + error.message);
+  }
+}

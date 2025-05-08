@@ -121,3 +121,37 @@ export const getAllNoLimit = async (req, res) => {
     });
   }
 };
+
+export const setFeatured = async (req, res) => {
+  const { id } = req.params;
+  const { isFeatured } = req.body;
+  try {
+    const category = await categoryService.setFeatured(id, isFeatured);
+    return res.status(200).json({
+      code: 200,
+      message: "Cập nhật trạng thái nổi bật thành công",
+      data: category
+    });
+  } catch (error) {
+    res.status(400).json({
+      code: 400,
+      message: error.message
+    });
+  }
+}
+
+export const getFeatured = async (req, res) => {
+  try {
+    const categories = await categoryService.getFeaturedCategories();
+    return res.status(200).json({
+      code: 200,
+      message: "Lấy danh sách danh mục nổi bật thành công",
+      data: categories
+    });
+  } catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: error.message
+    });
+  }
+}

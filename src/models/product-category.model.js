@@ -14,6 +14,7 @@ const productCategorySchema = new mongoose.Schema({
   thumbnail: String,
   status: String,
   position: Number,
+  isFeatured: { type: Boolean, default: false },
   deleted: {
     type: Boolean,
     default: false
